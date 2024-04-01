@@ -83,6 +83,42 @@ public class BookRepositoryTest {
     }
 
     // 4.책 수정
+    @Sql("classpath:db/tableInit.sql")
+    @Test
+    public void 책수정_test() {
+        // 현재 1, junit, 나나 들어가있음
+        // given
+        Long id = 1L;
+        String title = "junit5";
+        String author = "아리";
+        Book book = new Book(id, title, author);
+
+        // when
+        bookRepository.findAll().stream()
+                .forEach((b) -> {
+                    System.out.println("스타트 =======================");
+                    System.out.println(b.getId());
+                    System.out.println(b.getTitle());
+                    System.out.println(b.getAuthor());
+                    System.out.println("1번완료 ======================");
+                });
+        Book bookPS = bookRepository.save(book);
+        // bookRepository에서 전체를 꺼내서 스트림
+        bookRepository.findAll().stream()
+                .forEach((b) -> {
+                    System.out.println(b.getId());
+                    System.out.println(b.getTitle());
+                    System.out.println(b.getAuthor());
+                    System.out.println("2번완료 ======================");
+                });
+        // 책 수정이 실행될 때 BeforeEach가 실해되어서 동일한 아이디가 있다면 update, 없다면 insert
+        // 지금 insert되었는지 update되었는지 알 수가 없다.
+        System.out.println(bookPS.getId());
+        System.out.println(bookPS.getTitle());
+        System.out.println(bookPS.getAuthor());
+        System.out.println("3번완료 ===============================");
+        // then
+    }
 
     // 5. 책 삭제
     @Sql("classpath:db/tableInit.sql")
