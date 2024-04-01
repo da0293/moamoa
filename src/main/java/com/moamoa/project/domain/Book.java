@@ -14,8 +14,8 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Book {
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(length = 50, nullable = false)
@@ -24,8 +24,7 @@ public class Book {
     private String author;
 
     @Builder
-    public Book(Long id, String title, String author) {
-        this.id = id;
+    public Book(String title, String author) {
         this.title = title;
         this.author = author;
     }
